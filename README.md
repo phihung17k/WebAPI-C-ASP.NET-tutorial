@@ -307,7 +307,7 @@
   - **Routing by Action Name**
     
     - ```csharp
-      routes.MapHttpRoute(
+      config.Routes.MapHttpRoute(
           name: "ActionApi",
           routeTemplate: "api/{controller}/{action}/{id}",
           defaults: new { id = RouteParameter.Optional }
@@ -351,5 +351,140 @@
       [NonAction]  
       public string GetPrivateData() { ... }
       ```
+
+- **Attribute Routing**
+  
+  - The other ways to routing
+    
+    - ```csharp
+      [Route("customers/{customerId}/orders")]
+      public IEnumerable<Order> GetOrdersByCustomer(int customerId){}
+      ```
+    
+    - Map to `/customers/1/orders`
+  
+  - To **enable Attribute Routing**, call **MapHttpAttributeRoutes**
+    
+    ```csharp
+    public static class WebApiConfig
+    {
+        public static void Register(HttpConfiguration config)
+        {
+            // Attribute routing.
+            config.MapHttpAttributeRoutes();
+        }
+    }
+    ```
+  
+  - Attribute routing can be combined with [convention-based](https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/routing-in-aspnet-web-api) routing through **MapHttpRoute** method
+    
+    ```csharp
+    public static class WebApiConfig
+    {
+        public static void Register(HttpConfiguration config)
+        {
+            // Attribute routing.
+            config.MapHttpAttributeRoutes();
+    
+            // Convention-based routing.
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+        }
+    }
+    ```
+  
+  - Adding Route Attribute
+    
+    ```csharp
+    public class OrdersController : ApiController
+    {
+        [Route("customers/{customerId}/orders")]
+        [HttpGet]
+        public IEnumerable<Order> FindOrdersByCustomer(int customerId) { ... }
+    }
+    ```
+    
+    Notice `{customerId}` in route **matches** the `customerId` in the method
+  
+  - Combine `[Route]` and HTTP Methods: `[HttpGet]`, ... . This is similar to `[AcceptVerbs]` attribute
+    
+    ```csharp
+    [Route("api/books")]
+    [HttpPost]
+    public HttpResponseMessage CreateBook(Book book) { ... }
+    ```
+  
+  - **Route Prefixes**
+    
+    - Sample not use `[RoutePrefix]`
+      
+      ```csharp
+      public class BooksController : ApiController
+      {
+          [Route("api/books")]
+          public IEnumerable<Book> GetBooks() { ... }
+      
+          [Route("api/books/{id:int}")]
+          public Book GetBook(int id) { ... }
+      
+          [Route("api/books")]
+          [HttpPost]
+          public HttpResponseMessage CreateBook(Book book) { ... }
+      }
+      ```
+    
+    - Sample use `[RoutePrefix]`
+      
+      ```csharp
+      [RoutePrefix("api/books")]
+      public class BooksController : ApiController
+      {
+          // GET api/books
+          [Route("")]
+          public IEnumerable<Book> Get() { ... }
+      
+          // GET api/books/5
+          [Route("{id:int}")]
+          public Book Get(int id) { ... }
+      
+          // POST api/books
+          [Route("")]
+          public HttpResponseMessage Post(Book book) { ... }
+      }
+      ```
+    
+    - Use a tilde (~) on the method attribute to override the route prefix:
+      
+      ```csharp
+      [RoutePrefix("api/books")]
+      public class BooksController : ApiController
+      {
+          // GET /api/authors/1/books
+          [Route("~/api/authors/{authorId:int}/books")]
+          public IEnumerable<Book> GetByAuthor(int authorId) { ... }
+      }
+      ```
+    
+    - Include parameters: `[RoutePrefix("customer/{customerId}")]`
+  
+  - Route Contraints
+    
+    - Syntax: `"{parameter:constraint}"`, see [Route Contraints]([Attribute Routing in ASP.NET Web API 2 | Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2#route-constraints) )
+    
+    - ```csharp
+      [Route("users/{id:int}")]
+      public User GetUserById(int id) { ... }
+      
+      [Route("users/{id:int:min(1)}")]
+      public User GetUserById(int id) { ... }
+      
+      [Route("users/{name}")]
+      public User GetUserByName(string name) { ... }
+      ```
+    
+    - 
 
 

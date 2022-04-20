@@ -28,6 +28,7 @@ namespace WebAPI2.Controllers
         //    return products;
         //}
 
+        [Route("{id:int}")]
         public IHttpActionResult GetProduct(int id)
         {
             var product = products.FirstOrDefault(p => p.Id == id);

@@ -68,3 +68,15 @@ E:\Capstone\test_be\WebAPI2\WebAPI2\obj\Debug\WebAPI2.pdb
 E:\Capstone\test_be\WebAPI2\WebAPI2\bin\Microsoft.Web.Infrastructure.dll
 E:\Capstone\test_be\WebAPI2\WebAPI2\bin\Swashbuckle.Core.dll
 E:\Capstone\test_be\WebAPI2\WebAPI2\bin\WebActivatorEx.dll
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.Helpers.dll
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.Mvc.dll
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.Razor.dll
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.WebPages.Deployment.dll
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.WebPages.dll
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.WebPages.Razor.dll
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.Helpers.xml
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.Mvc.xml
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.Razor.xml
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.WebPages.xml
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.WebPages.Deployment.xml
+E:\Capstone\test_be\WebAPI2\WebAPI2\bin\System.Web.WebPages.Razor.xml
